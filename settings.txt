@@ -9,7 +9,7 @@ set noexpandtab
 set tabstop=4
 set shiftwidth=4
 set list
-set listchars=tab:>\ 
+set listchars=tab:▸\ 
 hi Comment      guifg=#87AF87 gui=italic
 hi Constant     guifg=#33FF33
 hi Number       guifg=#00FF00 gui=bold
