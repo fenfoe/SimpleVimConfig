@@ -1,22 +1,88 @@
-set nocompatible
-set number
-set cursorline
-set background=dark
-set termguicolors
-syntax on
-filetype on
-set noexpandtab
-set tabstop=4
-set shiftwidth=4
-set list
-set listchars=tab:▸\ 
-hi Comment      guifg=#87AF87 gui=italic
-hi Constant     guifg=#33FF33
-hi Number       guifg=#00FF00 gui=bold
-hi String       guifg=#00FFFF
-hi Function     guifg=#88FF88
-hi SpecialKey   guifg=#00FF00 gui=bold
-hi LineNr       guifg=#008800
-hi CursorLineNr guifg=#00FF00 gui=bold
-hi CursorLine   guifg=#001100
-hi EndOfBuffer  guifg=#002200
+set nocompatible               " Disable Vi compatibility for full Vim features
+set number                     " Show absolute line numbers
+set relativenumber             " Show relative line numbers 
+set cursorline                 " Highlight the line with the cursor
+set background=dark            " Dark theme for colorschemes
+set termguicolors              " Enable 24-bit true color support
+syntax on                      " Enable syntax highlighting
+filetype plugin indent on      " Enable filetype detection and automatic indentation
+
+" Tab and indentation settings
+set noexpandtab                " Use actual tabs
+set tabstop=4                  " A tab character is displayed as 4 spaces
+set shiftwidth=4               " Indentation commands use 4 spaces
+set smarttab                   " Smart tab behavior at line start
+set autoindent                 " Copy indentation from the previous line
+set smartindent                " Intelligent auto-indenting for code
+
+" Visual indicators
+set list                       " Show hidden characters (tabs, spaces, EOL)
+set listchars=tab:▸\ ,eol:¬,space:⋅  " Customize symbols for tabs, EOL, and spaces
+
+" Clipboard
+set clipboard=unnamedplus      " Use system clipboard for copy/paste
+
+" Undo and backups
+set undodir=~/.vim/undodir     " Directory for persistent undo files
+set hidden                     " Allow switching buffers without saving
+set noswapfile                 " Disable swap files
+set backupcopy=yes             " Keep backups to avoid file corruption
+set undofile                   " Enable persistent undo history
+
+" Status line and info
+set laststatus=2               " Always show the status line
+set ruler                      " Show cursor position
+set statusline=%F\ %y\ %m%r%h%w\ %{mode()}\ %P  " Detailed custom status line
+
+" Searching
+set incsearch                  " Show matches as you type
+set hlsearch                   " Highlight search matches
+set ignorecase                 " Case-insensitive search
+set smartcase                  " Case-sensitive if uppercase is used
+set wildmenu                   " Better command-line completion menu
+
+" Performance
+set lazyredraw                 " Don't redraw during macros or complex commands (faster)
+set ttyfast                    " Assume terminal is fast (legacy performance setting)
+set updatetime=300             " Faster update for CursorHold events
+
+colorscheme gruvbox            " Set gruvbox as the colorscheme
+
+
+" ================================================
+" Python-specific settings
+" ================================================
+
+" Use spaces in Python, set indentation and comments
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+autocmd FileType python setlocal tabstop=4
+autocmd FileType python setlocal smartindent
+autocmd FileType python setlocal commentstring=#\ %s
+
+" Quick comment mappings for Python
+nnoremap <leader>if :%s/^/\# /<CR>          " Add # to the start of every line in normal mode
+vnoremap <leader>if :'<,'>s/^/#\ /<CR>     " Add # to selected lines in visual mode
+
+" Remove trailing whitespace
+nnoremap <leader>rf :%s/\s\+$//e<CR>        " Remove trailing spaces from the file
+
+" ================================================
+" Normal mode mappings (nnoremap)
+" ================================================
+
+nnoremap <C-n> :Lex 30<CR>                   " Open file explorer (netrw) with 30-char width
+nnoremap <C-k> :q!<CR>                       " Quit current buffer without saving
+nnoremap <C-s> :w<CR>                        " Save current file
+nnoremap <C-q> :wq<CR>                       " Save and quit
+nnoremap <C-a> :wqa<CR>                      " Save all and quit all files
+
+set mouse=a                                 " Enable mouse support for all modes
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'makerj/vim-pdf'                       " Open and view PDF files inside Vim
+Plug 'tpope/vim-surround'                    " Easily manipulate surrounding characters like (), [], "", ''
+Plug 'tpope/vim-repeat'                      " Repeat supported plugin commands with .
+Plug 'tpope/vim-commentary'                  " Comment/uncomment code easily using gc
+
+call plug#end()
