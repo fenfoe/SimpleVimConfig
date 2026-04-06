@@ -72,7 +72,8 @@ nnoremap <leader>rf :%s/\s\+$//e<CR>        " Remove trailing spaces from the fi
 nnoremap <C-n> :Lex 30<CR>                   " Open file explorer (netrw) with 30-char width
 nnoremap <C-s> :w<CR>                        " Save current file
 nnoremap <C-a> :wqa<CR>                      " Save all and quit all files
-nnoremap <C-t> :vert term<CR>
+nnoremap zz :q!<CR>                          " Quit without saving
+nnoremap <C-t> :vert term<CR>                " Open a terminal
 set mouse=a                                 " Enable mouse support for all modes
 
 " ================================================
