@@ -25,7 +25,6 @@ set clipboard=unnamedplus      " Use system clipboard for copy/paste
 " Undo and backups
 set undodir=~/.vim/undodir     " Directory for persistent undo files
 set hidden                     " Allow switching buffers without saving
-set noswapfile                 " Disable swap files
 set backupcopy=yes             " Keep backups to avoid file corruption
 set undofile                   " Enable persistent undo history
 
@@ -48,7 +47,7 @@ set updatetime=300             " Faster update for CursorHold events
 
 colorscheme gruvbox            " Set gruvbox as the colorscheme
 
-
+let mapleader = " "
 " ================================================
 " Python-specific settings
 " ================================================
@@ -71,16 +70,42 @@ nnoremap <leader>rf :%s/\s\+$//e<CR>        " Remove trailing spaces from the fi
 " ================================================
 
 nnoremap <C-n> :Lex 30<CR>                   " Open file explorer (netrw) with 30-char width
-nnoremap <C-k> :q!<CR>                       " Quit current buffer without saving
 nnoremap <C-s> :w<CR>                        " Save current file
-nnoremap <C-q> :wq<CR>                       " Save and quit
 nnoremap <C-a> :wqa<CR>                      " Save all and quit all files
-
+nnoremap <C-t> :vert term<CR>
 set mouse=a                                 " Enable mouse support for all modes
+
+" ================================================
+" Splits and Tabbed Files
+" ================================================
+set splitbelow splitright
+
+" Remap splits using CTRL + hjkl
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Make adjusing split sizes
+nnoremap <silent> <C-Left> :vertical resize +3<CR>
+nnoremap <silent> <C-Right> :vertical resize -3<CR>
+nnoremap <silent> <C-Up> :resize +3<CR>
+nnoremap <silent> <C-Down> :resize -3<CR>
+
+" Change 2 split windows from vect to horiz or horiz to vect
+nnoremap <Leader>th <C-w>t<C-w>H
+nnoremap <Leader>tk <C-w>t<C-w>K
+
+tnoremap <Esc> <C-\><C-n>:q!<CR> " Type Esc to leave a terminal mode 
+
+" ================================================
+" Plugins
+" ================================================
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'makerj/vim-pdf'                       " Open and view PDF files inside Vim
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' } " Go development plugin with binaries installation
 Plug 'tpope/vim-surround'                    " Easily manipulate surrounding characters like (), [], "", ''
 Plug 'tpope/vim-repeat'                      " Repeat supported plugin commands with .
 Plug 'tpope/vim-commentary'                  " Comment/uncomment code easily using gc
