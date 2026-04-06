@@ -97,7 +97,7 @@ nnoremap <silent> <C-Down> :resize -3<CR>
 nnoremap <Leader>th <C-w>t<C-w>H
 nnoremap <Leader>tk <C-w>t<C-w>K
 
-tnoremap <Esc> <C-\><C-n>:q!<CR> " Type Esc to leave a terminal mode 
+tnoremap <Esc> <C-\><C-n>:q!<CR> " Type Esc to quit a terminal 
 
 " ================================================
 " Plugins
